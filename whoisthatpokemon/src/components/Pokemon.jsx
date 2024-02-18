@@ -13,7 +13,7 @@ function Pokemon() {
 
   const [points, setPoints] = useState({
     hit: 0,
-    miss: 0,
+    miss: 3,
   });
 
   const handleInputChange = (e) => {
@@ -33,7 +33,7 @@ function Pokemon() {
       });
     } else {
       setPoints((prevPoints) => {
-        const updateMiss = prevPoints.miss + 1;
+        const updateMiss = prevPoints.miss - 1;
         setPokemonName("");
         return { ...prevPoints, miss: updateMiss };
       });
@@ -70,7 +70,7 @@ function Pokemon() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-blue-100">
-      {points.miss === 3 ? (
+      {points.miss === 0 ? (
         <GameOver gamePoints={points} DataPoke={pokemonData}/>
       ) : (
         <>
@@ -86,11 +86,11 @@ function Pokemon() {
             <h2 className="mb-4 text-xl font-bold">Score: {points.hit}</h2>
             <h2
               className={`text-xl font-bold ${
-                points.miss === 3
+                points.miss === 1
                   ? "text-red-600"
                   : points.miss === 2
                   ? "text-red-500"
-                  : points.miss === 1
+                  : points.miss === 3
                   ? "text-red-400"
                   : ""
               }`}
